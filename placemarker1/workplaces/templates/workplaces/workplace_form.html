@@ -1,0 +1,27 @@
+{% extends 'workplaces/base.html' %}
+
+{% block title %}{{ workplace.number|default:"Новое" }} рабочее место{% endblock %}
+
+{% block content %}
+<h1>
+    {% if workplace.pk %}
+        Редактировать рабочее место
+    {% else %}
+        Создать новое рабочее место
+    {% endif %}
+</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+     {% if form.instance.employee %}
+        <p>
+            <label>Отдел:</label>
+            {{ form.instance.employee.department }}
+        </p>
+    {% endif %}
+    <button type="submit">Сохранить</button>
+</form>
+
+<a href="{% url 'workplaces' %}">Назад к списку</a>
+{% endblock %}

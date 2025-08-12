@@ -1,0 +1,10 @@
+from django import forms
+from.models import Workplace
+
+class WorkplaceForm(forms.ModelForm):
+    class Meta:
+        model = Workplace
+        fields = ['number', 'type', 'status', 'employee']
+        widgets = {
+            'employee': forms.Select(attrs={'class': 'form-control'}),
+        }

@@ -1,0 +1,18 @@
+{% extends 'employees/base.html' %}
+
+{% block content %}
+<h1>Подтверждение удаления</h1>
+
+<p>Вы действительно хотите удалить сотрудника {{ employee.last_name }} {{ employee.first_name }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+        Да, удалить
+    </button>
+    <a href="{% url 'employee_list' %}" class="btn btn-secondary">
+        Отмена
+    </a>
+</form>
+
+{% endblock %}

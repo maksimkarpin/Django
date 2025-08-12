@@ -1,0 +1,15 @@
+{% extends 'workplaces/base.html' %}
+
+{% block title %}Подтверждение удаления{% endblock %}
+
+{% block content %}
+<h1>Подтверждение удаления рабочего места</h1>
+
+<p>Вы действительно хотите удалить рабочее место №{{ workplace.number }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Подтвердить удаление</button>
+    <a href="{% url 'workplace_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'workplaces/base.html' %}
+
+{% block content %}
+<h1>Список рабочих мест</h1>
+<a href="{% url 'workplace_create' %}" class="btn btn-primary mb-3">Добавить рабочее место</a>
+<a href="{% url 'employees' %}" class="btn btn-secondary mb-3">Перейти к сотрудникам</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Тип</th>
+            <th>Статус</th>
+            <th>Отдел</th>
+            <th>Сотрудник</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for workplace in workplaces %}
+        <tr>
+            <td>{{ workplace.number }}</td>
+            <td>{{ workplace.type }}</td>
+            <td>{{ workplace.status }}</td>
+            <td>{{ workplace.employee.department }}</td>
+            <td>{{ workplace.employee }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
