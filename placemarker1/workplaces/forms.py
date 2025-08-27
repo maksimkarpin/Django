@@ -6,5 +6,6 @@ class WorkplaceForm(forms.ModelForm):
         model = Workplace
         fields = ['number', 'type', 'status', 'employee']
         widgets = {
-            'employee': forms.Select(attrs={'class': 'form-control'}),
+            'type': forms.Select(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs={'class': 'form-control'})
         }

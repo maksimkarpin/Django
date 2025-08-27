@@ -21,6 +21,19 @@ def workplace_create(request):
     return render(request, 'workplaces/workplace_form.html', {'form': form})
 
 
+def workplace_edit(request, pk):
+    workplace = get_object_or_404(Workplace, pk=pk)
+
+    if request.method == 'POST':
+        form = WorkplaceForm(request.POST, instance=workplace)
+        if form.is_valid():
+            form.save()
+            return redirect('workplace_list')
+    else:
+        form = WorkplaceForm(instance=workplace)
+
+    return render(request, 'workplaces/workplace_form.html', {'form': form})
+
 def workplace_update(request, pk):
     workplace = get_object_or_404(Workplace, pk=pk)
     if request.method == 'POST':
@@ -36,22 +49,48 @@ def workplace_update(request, pk):
 
 def workplace_delete(request, pk):
     workplace = get_object_or_404(Workplace, pk=pk)
+
     if request.method == 'POST':
         workplace.delete()
-        messages.success(request, 'Рабочее место успешно удалено')
         return redirect('workplace_list')
-    return render(request, 'workplaces/workplace_confirm_delete.html', {'workplace': workplace})
+
+    return render(
+        request,
+        'workplaces/workplace_confirm_delete.html',
+        {'workplace': workplace}
+    )
 
 def workplace_occupied(request):
     workplaces = Workplace.objects.filter(status='occupied')
     return render(request, 'workplaces/workplace_occupied.html', {'workplaces': workplaces})
 
 
+def workplace_add(request):
+    if request.method == 'POST':
+        form = WorkplaceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('workplace_list')
+    else:
+        form = WorkplaceForm()
+
+    return render(request, 'workplaces/workplace_form.html', {'form': form})
+
+
+def workplace_edit(request, pk):
+    workplace = get_object_or_404(Workplace, pk=pk)
+
+    if request.method == 'POST':
+        form = WorkplaceForm(request.POST, instance=workplace)
+        if form.is_valid():
+            form.save()
+            return redirect('workplace_list')
+    else:
+        form = WorkplaceForm(instance=workplace)
+
+    return render(request, 'workplaces/workplace_form.html', {'form': form})
 
 
 
-
-#def index(request):
-    #return HttpResponse("Привет, мир.")
 
 
